@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --bg: #fff;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
