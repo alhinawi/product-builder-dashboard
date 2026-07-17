@@ -1,12 +1,12 @@
 # Product Builder Dashboard
 
-A modern React + Vite dashboard for browsing product cards and opening a modal to add new products. Built with TypeScript, Tailwind CSS, and Headless UI, this project showcases a clean, responsive product management interface with room to grow into a full CRUD experience.
+A modern React + Vite dashboard for browsing product cards and opening a modal to add new products. Built with TypeScript, Tailwind CSS, and Headless UI, this project showcases a clean, responsive product management interface.
 
-## Overview
+## 📌 Overview
 
-Product Builder Dashboard is designed as a lightweight product catalog UI. It displays products in a responsive grid, supports a modal-based add-product flow, and uses reusable components to keep the codebase organized and easy to extend.
+Product Builder Dashboard is designed as a lightweight product catalog UI. It displays products in a responsive grid, supports a modal-based add-product flow, and uses reusable components to keep the codebase clean and easy to scale.
 
-## Features
+## ✨ Features
 
 - Responsive product grid layout
 - Product cards with image, title, description, price, and actions
@@ -15,7 +15,7 @@ Product Builder Dashboard is designed as a lightweight product catalog UI. It di
 - Tailwind CSS styling for a modern, consistent UI
 - Easy-to-extend component architecture
 
-## Tech Stack
+## 🧰 Tech Stack
 
 - React 19
 - Vite
@@ -23,7 +23,7 @@ Product Builder Dashboard is designed as a lightweight product catalog UI. It di
 - Tailwind CSS
 - Headless UI
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -60,27 +60,27 @@ pnpm preview
 pnpm lint
 ```
 
-## Usage
+## 🖥️ Usage
 
 - Open the app in your browser after starting the dev server.
 - Browse the product cards displayed on the dashboard.
 - Use the add-product button to open the modal and view the form flow.
 - Extend the form and actions to connect with real create, edit, and delete functionality.
 
-## Project Structure
+## 🗂️ Project Structure
 
 - `src/App.tsx` renders the dashboard and modal trigger
 - `src/components/` contains reusable UI and product components
 - `src/data/` stores the sample product and form data
 - `src/assets/images/` contains the local product images
 
-## Data and UI Notes
+## 📝 Data and UI Notes
 
 - The current UI uses mock product data.
 - The modal and form controls are wired for presentation.
 - The structure is ready to be extended with API-backed product management.
 
-## Future Improvements
+## 🔮 Future Improvements
 
 - Connect the product form to a backend API
 - Add create, edit, and delete product flows
@@ -89,10 +89,10 @@ pnpm lint
 - Add filtering, sorting, and search
 - Include screenshots or a demo GIF in this README
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome. If you want to improve the dashboard, consider opening an issue or submitting a pull request with your changes.
 
-## License
+## 📄 License
 
 Add your preferred license here if the project should be open source.
