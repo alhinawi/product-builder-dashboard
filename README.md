@@ -93,6 +93,4 @@ pnpm lint
 
 Contributions are welcome. If you want to improve the dashboard, consider opening an issue or submitting a pull request with your changes.
 
-## 📄 License
 
-Add your preferred license here if the project should be open source.
