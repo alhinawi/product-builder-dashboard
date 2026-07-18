@@ -1,23 +1,37 @@
+import { useState } from "react";
+import { productList, formInputsList } from "./data";
+import type { IProduct } from "./interfaces";
 import ProductCard from "./components/ProductCard";
+import Input from "./components/ui/Input";
 import Modal from "./components/ui/Modal";
 import Button from "./components/ui/Button";
-import { productList, formInputsList } from "./data";
-import { useState } from "react";
-import Input from "./components/ui/Input";
 
 function App() {
   /* ------- STATE -------  */
   const [isOpen, setIsOpen] = useState(false);
+  const [product, setProduct] = useState<IProduct>({
+    title: "",
+    description: "",
+    imageURL: "",
+    price: "",
+    colors: [],
+    category: {
+      name: "",
+      imageURL: "",
+    },
+  });
 
   /* ------- HANDLER -------  */
 
-  function open() {
-    setIsOpen(true);
-  }
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
 
-  function close() {
-    setIsOpen(false);
-  }
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    console.log(product);
+
+    setProduct({ ...product, [name]: value });
+  };
 
   /* ------- RENDER -------  */
 
@@ -34,7 +48,8 @@ function App() {
         type={input.type}
         name={input.name}
         id={input.id}
-      
+        value={product[input.name]}
+        onChange={onChangeHandler}
       />
     </div>
   ));
@@ -52,17 +67,20 @@ function App() {
         {renderProductList}
       </div>
       <Modal isOpen={isOpen} closeModal={close} title="Add A New Product">
-        <form className="flex flex-col gap-y-3 ">{renderFormInputs}
-            <div className="flex gap-x-3">
-          <Button className="bg-gray-400  hover:bg-gray-500" onClick={close}>
-            Cancel
-          </Button>
-          <Button className="bg-indigo-700  hover:bg-indigo-800" onClick={open}>
-            Submit
-          </Button>
-        </div>
+        <form className="flex flex-col gap-y-3 ">
+          {renderFormInputs}
+          <div className="flex gap-x-3">
+            <Button className="bg-gray-400  hover:bg-gray-500" onClick={close}>
+              Cancel
+            </Button>
+            <Button
+              className="bg-indigo-700  hover:bg-indigo-800"
+              onClick={open}
+            >
+              Submit
+            </Button>
+          </div>
         </form>
-      
       </Modal>
     </main>
   );

@@ -1,4 +1,4 @@
-import {Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import type { ReactNode } from "react";
 
 interface Props {
@@ -8,9 +8,7 @@ interface Props {
   children?: ReactNode;
 }
 
-const Modal = ({ isOpen, closeModal , title, children }: Props) => {
-  
-
+const Modal = ({ isOpen, closeModal, title, children }: Props) => {
   return (
     <>
       <Dialog
@@ -31,10 +29,8 @@ const Modal = ({ isOpen, closeModal , title, children }: Props) => {
                   {title}
                 </DialogTitle>
               )}
-           
-              <div className="mt-4">
-                {children}
-              </div>
+
+              <div className="mt-4">{children}</div>
             </DialogPanel>
           </div>
         </div>

@@ -18,7 +18,7 @@ const ProductCard = ({ product }: Props) => {
         altText={title}
         className="rounded-md  h-52 lg:object-cover"
       />
-      <h3 className=" text-lg font-semibold">{txtSlicer(title, 25)}</h3>
+      <h3 className=" text-lg font-semibold">{title}</h3>
       <p className="text-xs text-gray-500 wrap-break-word">
         {txtSlicer(description, 50)}
       </p>
@@ -53,8 +53,6 @@ const ProductCard = ({ product }: Props) => {
           DELETE
         </Button>
       </div>
-
-    
     </div>
   );
 };
