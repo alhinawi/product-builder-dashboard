@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState  } from "react";
 import { productList, formInputsList } from "./data";
 import type { IProduct } from "./interfaces";
+import type { ChangeEvent, FormEvent } from "react";
 import ProductCard from "./components/ProductCard";
 import Input from "./components/ui/Input";
 import Modal from "./components/ui/Modal";
 import Button from "./components/ui/Button";
 
 function App() {
-  /* ------- STATE -------  */
-  const [isOpen, setIsOpen] = useState(false);
-  const [product, setProduct] = useState<IProduct>({
+
+  const defaultProduct: IProduct = {
     title: "",
     description: "",
     imageURL: "",
@@ -18,21 +18,35 @@ function App() {
     category: {
       name: "",
       imageURL: "",
-    },
-  });
+    }
+  }
+
+  /* ------- STATE -------  */
+  const [isOpen, setIsOpen] = useState(false);
+  const [product, setProduct] = useState<IProduct>(defaultProduct);
+
 
   /* ------- HANDLER -------  */
 
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     console.log(product);
 
     setProduct({ ...product, [name]: value });
   };
 
+  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); 
+    console.log("Submitted Product:", product);
+  }
+
+  const onCancelHandler = () => {
+    setProduct(defaultProduct);
+    close();
+  }
   /* ------- RENDER -------  */
 
   const renderProductList = productList.map((product) => (
@@ -67,10 +81,10 @@ function App() {
         {renderProductList}
       </div>
       <Modal isOpen={isOpen} closeModal={close} title="Add A New Product">
-        <form className="flex flex-col gap-y-3 ">
+        <form className="flex flex-col gap-y-3 " onSubmit={onSubmitHandler}>
           {renderFormInputs}
           <div className="flex gap-x-3">
-            <Button className="bg-gray-400  hover:bg-gray-500" onClick={close}>
+            <Button className="bg-gray-400  hover:bg-gray-500" type="button" onClick={onCancelHandler} >
               Cancel
             </Button>
             <Button
