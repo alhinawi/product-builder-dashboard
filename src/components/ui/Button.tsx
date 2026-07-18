@@ -8,7 +8,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({ children, className, width = "w-full", ...rest }: Props) => {
     return (
-        <button className={` ${width} p-2 rounded-md text-white cursor-pointer ${className || ''}`} {...rest}>
+        <button className={` ${width} p-2 rounded-lg text-white cursor-pointer ${className || ''}`} {...rest}>
             {children}
         </button>
     )
