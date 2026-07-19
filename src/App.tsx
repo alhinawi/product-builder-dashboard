@@ -3,9 +3,11 @@ import { productList, formInputsList } from "./data";
 import type { IProduct } from "./interfaces";
 import type { ChangeEvent, SubmitEvent } from "react";
 import ProductCard from "./components/ProductCard";
+import ErrorMessage from "./components/ui/ErrorMessage";
 import Input from "./components/ui/Input";
 import Modal from "./components/ui/Modal";
 import Button from "./components/ui/Button";
+import { productValidation } from "./schema";
 
 function App() {
   const defaultProduct: IProduct = {
@@ -23,6 +25,12 @@ function App() {
   /* ------- STATE -------  */
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    imageURL: "",
+    price: "",
+  });
 
 
   /* ------- HANDLER -------  */
@@ -38,17 +46,40 @@ function App() {
       ...prevProduct,
       [name]: value,
     }));
+
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   const onSubmitHandler = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault(); 
-    console.log("Submitted Product:", product);
+const { title, description, imageURL, price } = product;
+
+    const errors = productValidation({ title, description, imageURL, price });
+    console.log(errors);
+
+    const hasErrors = Object.values(errors).some((error) => error !== "");
+    console.log(hasErrors);
+
+    if (!hasErrors) {
+      console.log("Form submitted successfully!");
+      setProduct(defaultProduct);
+      close();
+    } else {
+      setErrors(errors);
+      console.log("Form has errors. Please fix them before submitting.");
+    }
+
   }
 
   const onCancelHandler = () => {
     setProduct(defaultProduct);
     close();
   }
+
+  
   /* ------- RENDER -------  */
 
   const renderProductList = productList.map((product) => (
@@ -56,8 +87,8 @@ function App() {
   ));
 
   const renderFormInputs = formInputsList.map((input) => (
-    <div className="flex flex-col gap-y-0.5" key={input.id}>
-      <label htmlFor={input.id} className="text-sm font-medium text-gray-700">
+    <div className="flex flex-col " key={input.id}>
+      <label htmlFor={input.id} className="mb-0.5 text-sm font-medium text-gray-700">
         {input.label}
       </label>
       <Input
@@ -67,13 +98,14 @@ function App() {
         value={product[input.name]}
         onChange={onChangeHandler}
       />
+      <ErrorMessage msg={errors[input.name]} />
     </div>
   ));
 
   return (
     <main className="container mx-auto p-5">
       <Button
-        className="bg-indigo-700  hover:bg-indigo-800 mb-5"
+        className="bg-indigo-700 hover:bg-indigo-800 mb-3 mx-auto block" width="w-fit" 
         onClick={open}
       >
         Add Product

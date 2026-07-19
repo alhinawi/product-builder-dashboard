@@ -25,7 +25,7 @@ const Modal = ({ isOpen, closeModal, title, children }: Props) => {
               className="w-full max-w-md rounded-lg bg-white p-6 duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
             >
               {title && (
-                <DialogTitle className="text-base/7 font-medium ">
+                <DialogTitle className="text-base/7 font-medium">
                   {title}
                 </DialogTitle>
               )}
