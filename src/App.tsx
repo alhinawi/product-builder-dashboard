@@ -1,14 +1,13 @@
 import { useState  } from "react";
 import { productList, formInputsList } from "./data";
 import type { IProduct } from "./interfaces";
-import type { ChangeEvent, FormEvent } from "react";
+import type { ChangeEvent, SubmitEvent } from "react";
 import ProductCard from "./components/ProductCard";
 import Input from "./components/ui/Input";
 import Modal from "./components/ui/Modal";
 import Button from "./components/ui/Button";
 
 function App() {
-
   const defaultProduct: IProduct = {
     title: "",
     description: "",
@@ -35,10 +34,13 @@ function App() {
     const { name, value } = e.target;
     console.log(product);
 
-    setProduct({ ...product, [name]: value });
+    setProduct(prevProduct => ({
+      ...prevProduct,
+      [name]: value,
+    }));
   };
 
-  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault(); 
     console.log("Submitted Product:", product);
   }
@@ -89,7 +91,6 @@ function App() {
             </Button>
             <Button
               className="bg-indigo-700  hover:bg-indigo-800"
-              onClick={open}
             >
               Submit
             </Button>
